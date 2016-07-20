@@ -8,12 +8,15 @@ const url = 'https://pgorelease.nianticlabs.com/plfe/'
 // Resolve after 3500 seconds with the value `3500`
 const timeout = delay(3500, 3500)
 
+// Returns a promise that resolves to the time a `fetch` to `url` took
 function getfetchPromise () {
   const fetchPromise = time(fetch)(url)
 
   return fetchPromise.then(() => fetchPromise.time)
 }
 
+// Returns the return value of `getfetchPromise` or `timeout`, whichever
+// resolves first
 function getTimePromise () {
   return Promise.race([getfetchPromise(), timeout])
 }
