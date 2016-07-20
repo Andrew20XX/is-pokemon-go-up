@@ -10,9 +10,9 @@ const timeout = delay(3500, 3500)
 
 // Returns a promise that resolves to the time a `fetch` to `url` took
 function getfetchPromise () {
-  const fetchPromise = time(fetch)(url)
+  const timePromise = time(fetch)(url)
 
-  return fetchPromise.then(() => fetchPromise.time)
+  return timePromise.then(() => timePromise.time)
 }
 
 // Returns the return value of `getfetchPromise` or `timeout`, whichever
