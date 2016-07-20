@@ -1,14 +1,14 @@
 import test from 'ava'
 import fn from './'
 
-test('main ', async t => {
+test('main', async t => {
   const time = await fn()
 
   t.truthy(time)
   t.is(typeof time, 'string')
 })
 
-test('judge ', t => {
+test('judge', t => {
   const judge = fn.judge
 
   t.is(judge(-1), 'Error! Probably not a good sign, but try again.')
