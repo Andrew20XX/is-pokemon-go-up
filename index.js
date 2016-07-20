@@ -1,12 +1,21 @@
 'use strict'
 
 const fetch = require('node-fetch')
+const delay = require('delay')
 const time = require('promise-time')
 
 const url = 'https://pgorelease.nianticlabs.com/plfe/'
+// Resolve after 3500 seconds with the value `3500`
+const timeout = delay(3500, 3500)
+
+function getfetchPromise () {
+  const fetchPromise = time(fetch)(url)
+
+  return fetchPromise.then(() => fetchPromise.time)
+}
 
 function getTimePromise () {
-  return time(fetch)(url)
+  return Promise.race([getfetchPromise(), timeout])
 }
 
 function judge (time) {
@@ -19,7 +28,7 @@ function judge (time) {
 function isPokemonGoUp () {
   const p = getTimePromise()
 
-  return p.then(() => judge(p.time)).catch(() => judge(-1))
+  return p.then(judge).catch(() => judge(-1))
 }
 
 module.exports = isPokemonGoUp
