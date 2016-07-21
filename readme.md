@@ -16,7 +16,7 @@ $ npm install --save is-pokemon-go-up
 const isPokemonGoUp = require('is-pokemon-go-up')
 
 isPokemonGoUp()
-  .then(result => console.log(result))
+  .then(console.log)
 // => 'Yep. Go outside and catch some!'
 ```
 
